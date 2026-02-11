@@ -1,5 +1,5 @@
-resource "azurerm_digital_twins_endpoint_servicebus" "digital_twins_endpoint_servicebuss" {
-  for_each = var.digital_twins_endpoint_servicebuss
+resource "azurerm_digital_twins_endpoint_servicebus" "digital_twins_endpoint_servicebuses" {
+  for_each = var.digital_twins_endpoint_servicebuses
 
   digital_twins_id                       = each.value.digital_twins_id
   name                                   = each.value.name

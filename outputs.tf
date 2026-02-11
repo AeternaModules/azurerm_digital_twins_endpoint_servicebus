@@ -1,5 +1,5 @@
-output "digital_twins_endpoint_servicebuss" {
+output "digital_twins_endpoint_servicebuses" {
   description = "All digital_twins_endpoint_servicebus resources"
-  value       = azurerm_digital_twins_endpoint_servicebus.digital_twins_endpoint_servicebuss
+  value       = azurerm_digital_twins_endpoint_servicebus.digital_twins_endpoint_servicebuses
 }
 

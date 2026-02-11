@@ -1,6 +1,6 @@
-variable "digital_twins_endpoint_servicebuss" {
+variable "digital_twins_endpoint_servicebuses" {
   description = <<EOT
-Map of digital_twins_endpoint_servicebuss, attributes below
+Map of digital_twins_endpoint_servicebuses, attributes below
 Required:
     - digital_twins_id
     - name
