@@ -5,17 +5,29 @@ Required:
     - digital_twins_id
     - name
     - servicebus_primary_connection_string
+    - servicebus_primary_connection_string_key_vault_id (alternative to servicebus_primary_connection_string - read from Key Vault instead)
+    - servicebus_primary_connection_string_key_vault_secret_name (alternative to servicebus_primary_connection_string - read from Key Vault instead)
     - servicebus_secondary_connection_string
+    - servicebus_secondary_connection_string_key_vault_id (alternative to servicebus_secondary_connection_string - read from Key Vault instead)
+    - servicebus_secondary_connection_string_key_vault_secret_name (alternative to servicebus_secondary_connection_string - read from Key Vault instead)
 Optional:
     - dead_letter_storage_secret
+    - dead_letter_storage_secret_key_vault_id (alternative to dead_letter_storage_secret - read from Key Vault instead)
+    - dead_letter_storage_secret_key_vault_secret_name (alternative to dead_letter_storage_secret - read from Key Vault instead)
 EOT
 
   type = map(object({
-    digital_twins_id                       = string
-    name                                   = string
-    servicebus_primary_connection_string   = string
-    servicebus_secondary_connection_string = string
-    dead_letter_storage_secret             = optional(string)
+    digital_twins_id                                             = string
+    name                                                         = string
+    servicebus_primary_connection_string                         = string
+    servicebus_primary_connection_string_key_vault_id            = optional(string)
+    servicebus_primary_connection_string_key_vault_secret_name   = optional(string)
+    servicebus_secondary_connection_string                       = string
+    servicebus_secondary_connection_string_key_vault_id          = optional(string)
+    servicebus_secondary_connection_string_key_vault_secret_name = optional(string)
+    dead_letter_storage_secret                                   = optional(string)
+    dead_letter_storage_secret_key_vault_id                      = optional(string)
+    dead_letter_storage_secret_key_vault_secret_name             = optional(string)
   }))
   validation {
     condition = alltrue([
