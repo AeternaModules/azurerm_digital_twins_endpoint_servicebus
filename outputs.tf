@@ -1,3 +1,7 @@
+output "digital_twins_endpoint_servicebuses_id" {
+  description = "Map of id values across all digital_twins_endpoint_servicebuses, keyed the same as var.digital_twins_endpoint_servicebuses"
+  value       = { for k, v in azurerm_digital_twins_endpoint_servicebus.digital_twins_endpoint_servicebuses : k => v.id }
+}
 output "digital_twins_endpoint_servicebuses_dead_letter_storage_secret" {
   description = "Map of dead_letter_storage_secret values across all digital_twins_endpoint_servicebuses, keyed the same as var.digital_twins_endpoint_servicebuses"
   value       = { for k, v in azurerm_digital_twins_endpoint_servicebus.digital_twins_endpoint_servicebuses : k => v.dead_letter_storage_secret }
