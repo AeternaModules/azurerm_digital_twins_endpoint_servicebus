@@ -5,11 +5,11 @@ Required:
     - digital_twins_id
     - name
     - servicebus_primary_connection_string
-    - servicebus_primary_connection_string_key_vault_id (alternative to servicebus_primary_connection_string - read from Key Vault instead)
-    - servicebus_primary_connection_string_key_vault_secret_name (alternative to servicebus_primary_connection_string - read from Key Vault instead)
+    - servicebus_primary_connection_string_key_vault_id (optional, alternative to servicebus_primary_connection_string)
+    - servicebus_primary_connection_string_key_vault_secret_name (optional, alternative to servicebus_primary_connection_string)
     - servicebus_secondary_connection_string
-    - servicebus_secondary_connection_string_key_vault_id (alternative to servicebus_secondary_connection_string - read from Key Vault instead)
-    - servicebus_secondary_connection_string_key_vault_secret_name (alternative to servicebus_secondary_connection_string - read from Key Vault instead)
+    - servicebus_secondary_connection_string_key_vault_id (optional, alternative to servicebus_secondary_connection_string)
+    - servicebus_secondary_connection_string_key_vault_secret_name (optional, alternative to servicebus_secondary_connection_string)
 Optional:
     - dead_letter_storage_secret
     - dead_letter_storage_secret_key_vault_id (alternative to dead_letter_storage_secret - read from Key Vault instead)
@@ -29,30 +29,6 @@ EOT
     dead_letter_storage_secret_key_vault_id                      = optional(string)
     dead_letter_storage_secret_key_vault_secret_name             = optional(string)
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
-        length(v.servicebus_primary_connection_string) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
-        length(v.servicebus_secondary_connection_string) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
-        v.dead_letter_storage_secret == null || (length(v.dead_letter_storage_secret) > 0)
-      )
-    ])
-    error_message = "must not be empty"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_digital_twins_endpoint_servicebus's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
@@ -73,5 +49,14 @@ EOT
   #   source:    [from digitaltwinsinstance.ValidateDigitalTwinsInstanceID] !ok
   # path: digital_twins_id
   #   source:    [from digitaltwinsinstance.ValidateDigitalTwinsInstanceID] err != nil
+  # path: servicebus_primary_connection_string
+  #   condition: length(value) > 0
+  #   message:   must not be empty
+  # path: servicebus_secondary_connection_string
+  #   condition: length(value) > 0
+  #   message:   must not be empty
+  # path: dead_letter_storage_secret
+  #   condition: length(value) > 0
+  #   message:   must not be empty
 }
 
