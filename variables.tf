@@ -1,6 +1,6 @@
-variable "digital_twins_endpoint_servicebuses" {
+variable "digital_twins_endpoint_servicebus" {
   description = <<EOT
-Map of digital_twins_endpoint_servicebuses, attributes below
+Map of digital_twins_endpoint_servicebus, attributes below
 Required:
     - digital_twins_id
     - name
@@ -31,7 +31,7 @@ EOT
   }))
   validation {
     condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
+      for k, v in var.digital_twins_endpoint_servicebus : (
         length(v.name) >= 3
       )
     ])
@@ -39,7 +39,7 @@ EOT
   }
   validation {
     condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
+      for k, v in var.digital_twins_endpoint_servicebus : (
         length(v.name) <= 63
       )
     ])
@@ -47,7 +47,7 @@ EOT
   }
   validation {
     condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
+      for k, v in var.digital_twins_endpoint_servicebus : (
         length(v.servicebus_primary_connection_string) > 0
       )
     ])
@@ -55,7 +55,7 @@ EOT
   }
   validation {
     condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
+      for k, v in var.digital_twins_endpoint_servicebus : (
         length(v.servicebus_secondary_connection_string) > 0
       )
     ])
@@ -63,7 +63,7 @@ EOT
   }
   validation {
     condition = alltrue([
-      for k, v in var.digital_twins_endpoint_servicebuses : (
+      for k, v in var.digital_twins_endpoint_servicebus : (
         v.dead_letter_storage_secret == null || (length(v.dead_letter_storage_secret) > 0)
       )
     ])
